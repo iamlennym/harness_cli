@@ -1,0 +1,4 @@
+# Please save this file as .env
+
+#	Change the API_KEY to contain a SA token for the Harness Platform
+API_KEY=sat.6_vVHzoXXXXXXXXX-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.XXXXXXXXXXXXXXXXXXXX
