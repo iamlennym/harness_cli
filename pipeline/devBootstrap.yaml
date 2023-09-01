@@ -1,0 +1,245 @@
+pipeline:
+  name: devBootstrap
+  identifier: devBootstrap
+  projectIdentifier: Len_Sandbox
+  orgIdentifier: SE_Sandbox
+  tags: {}
+  stages:
+    - stage:
+        name: Create Git Repo
+        identifier: Onboard
+        type: CI
+        spec:
+          cloneCodebase: false
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Create GIT Repo
+                  identifier: Create_GIT_Repo
+                  spec:
+                    shell: Python
+                    command: |-
+                      import os
+                      import requests
+                      import json
+
+                      # Get the value of the environment variable 'GITHUB_TOKEN'
+                      access_token = os.environ.get("GITHUB_TOKEN")
+
+                      # Repository name
+                      repo_name = os.environ.get("REPO_NAME")
+
+                      # Github User Name
+                      user_name = os.environ.get("USER_NAME")
+
+                      # Repo Template Name
+                      template_repo_name = os.environ.get("REPO_TEMPLATE")
+
+                      if access_token is None:
+                          print("Environment variable 'GITHUB_TOKEN' is not set.")
+                      elif repo_name is None:
+                          print("Environment variable 'REPO_NAME' is not set.")
+                      elif user_name is None:
+                          print("Environment variable 'USER_NAME' is not set.")
+                      elif template_repo_name is None:
+                          print("Environment variable 'REPO_TEMPLATE' is not set.")
+                      else:
+                          # GitHub API endpoint for creating a repository
+                          # api_url = f"https://api.github.com/user/repos"
+                          api_url = f"https://api.github.com/repos/{user_name}/{template_repo_name}/generate"
+
+                          # Headers for the API request
+                          headers = {
+                              "Authorization": f"Bearer {access_token}",
+                              "Accept": "application/vnd.github.v3+json"
+                          }
+
+                          # Request payload
+                          data = {
+                              "name": repo_name,
+                              "private": True  # Change to True for a private repository
+                          }
+
+                          response = requests.post(api_url, headers=headers, data=json.dumps(data))
+
+                          if response.status_code == 201:
+                              repo_info = response.json()
+                              repo_id = repo_info["id"]
+                              print(f"Repository '{repo_name}' created with ID: {repo_id}")
+                          else:
+                              print(f"Failed to create repository '{repo_name}'. Status code: {response.status_code}")
+                              print(response.text)
+                    envVariables:
+                      GITHUB_TOKEN: <+secrets.getValue("LennyGithubRepoAdmin")>
+                      REPO_NAME: <+pipeline.variables.APPLICATION_NAME>
+                      USER_NAME: iamlennym
+                      REPO_TEMPLATE: GolangMicroService
+              - step:
+                  type: Run
+                  name: Clone and Patch Repo
+                  identifier: Clone_and_Patch_Repo
+                  spec:
+                    shell: Sh
+                    command: |-
+                      export FINAL_REPO_NAME=https://github.com/iamlennym/$APPLICATION_NAME.git
+
+                      git clone https://$USER_NAME:$GITHUB_TOKEN@github.com/iamlennym/$APPLICATION_NAME.git
+                      cd $APPLICATION_NAME
+                      ./patchName.sh $APPLICATION_NAME
+                    envVariables:
+                      GITHUB_TOKEN: <+secrets.getValue("LennyGithubRepoAdmin")>
+                      USER_NAME: iamlennym
+                      APPLICATION_NAME: <+pipeline.variables.APPLICATION_NAME>
+                    outputVariables:
+                      - name: FINAL_REPO_NAME
+          caching:
+            enabled: false
+            paths: []
+    - stage:
+        name: TF-create-pipeline
+        identifier: TFcreatepipeline
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: TerraformPlan
+                  name: PipelineCreate_Plan
+                  identifier: PipelineCreate
+                  spec:
+                    provisionerIdentifier: tfpipeline
+                    configuration:
+                      command: Apply
+                      configFiles:
+                        store:
+                          spec:
+                            connectorRef: LenGithub
+                            repoName: tf-pipeline
+                            gitFetchType: Branch
+                            branch: main
+                            folderPath: tf
+                          type: Github
+                      environmentVariables:
+                        - name: TF_VAR_PIPELINE_NAME
+                          value: <+pipeline.variables.APPLICATION_NAME.toString()> Pipeline
+                          type: String
+                        - name: TF_VAR_DOCKER_REPO
+                          value: iamlennym/<+pipeline.variables.APPLICATION_NAME.toString()>
+                          type: String
+                        - name: TF_VAR_DOCKER_REPO_CONNECTOR
+                          value: LenDockerHub
+                          type: String
+                        - name: TF_VAR_BUILD_NAME
+                          value: main
+                          type: String
+                        - name: TF_VAR_REPO_NAME
+                          value: <+pipeline.variables.APPLICATION_NAME.toString()>
+                          type: String
+                      secretManagerRef: harnessSecretManager
+                      skipRefreshCommand: false
+                  timeout: 10m
+              - step:
+                  type: TerraformApply
+                  name: PipelineCreate_Apply
+                  identifier: PipelineCreate_Apply
+                  spec:
+                    provisionerIdentifier: tfpipeline
+                    configuration:
+                      type: InheritFromPlan
+                  timeout: 10m
+        tags: {}
+    - stage:
+        name: TF-create-trigger
+        identifier: TFcreatetrigger
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: TerraformPlan
+                  name: TriggerCreate_Plan
+                  identifier: TriggerCreate
+                  spec:
+                    provisionerIdentifier: tftrigger
+                    configuration:
+                      command: Apply
+                      configFiles:
+                        store:
+                          spec:
+                            connectorRef: LenGithub
+                            repoName: tf-pipeline
+                            gitFetchType: Branch
+                            branch: main
+                            folderPath: tftrigger
+                          type: Github
+                      environmentVariables:
+                        - name: TF_VAR_PIPELINE_NAME
+                          value: <+pipeline.variables.APPLICATION_NAME.toString()> Pipeline
+                          type: String
+                        - name: TF_VAR_REPO_NAME
+                          value: <+pipeline.variables.APPLICATION_NAME.toString()>
+                          type: String
+                      secretManagerRef: harnessSecretManager
+                      skipRefreshCommand: false
+                  timeout: 10m
+              - step:
+                  type: TerraformApply
+                  name: TriggerCreate_Apply
+                  identifier: TriggerCreate_Apply
+                  spec:
+                    provisionerIdentifier: tftrigger
+                    configuration:
+                      type: InheritFromPlan
+                  timeout: 10m
+        tags: {}
+    - stage:
+        name: Wrap Up
+        identifier: Wrap_Up
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: ShellScript
+                  name: Display
+                  identifier: Display
+                  spec:
+                    shell: Bash
+                    onDelegate: true
+                    source:
+                      type: Inline
+                      spec:
+                        script: |-
+                          echo "Repo and Pipeline created..."
+                          echo "Repo Name : <+pipeline.stages.Onboard.spec.execution.steps.Clone_and_Patch_Repo.output.outputVariables.FINAL_REPO_NAME>"
+                    environmentVariables: []
+                    outputVariables: []
+                  timeout: 10m
+              - step:
+                  type: Email
+                  name: Email_1
+                  identifier: Email_1
+                  spec:
+                    to: leendert.meyer@harness.io
+                    cc: ""
+                    subject: "New application onboarded: <+pipeline.variables.APPLICATION_NAME>.toString()"
+                    body: "Repo: <+pipeline.stages.Onboard.spec.execution.steps.Clone_and_Patch_Repo.output.outputVariables.FINAL_REPO_NAME>.toString()"
+                  timeout: 10m
+        tags: {}
+  variables:
+    - name: APPLICATION_NAME
+      type: String
+      description: Application Name
+      required: true
+      value: <+input>
+

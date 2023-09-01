@@ -1,0 +1,265 @@
+{
+  "status": "SUCCESS",
+  "data": {
+    "pipelineExecutionSummary": {
+      "pipelineIdentifier": "devBootstrap",
+      "orgIdentifier": "SE_Sandbox",
+      "projectIdentifier": "Len_Sandbox",
+      "planExecutionId": "Orehd75NTp6JDo4LB2oqvg",
+      "name": "devBootstrap",
+      "status": "Running",
+      "tags": [],
+      "executionTriggerInfo": {
+        "triggerType": "MANUAL",
+        "triggeredBy": {
+          "uuid": "LennySA",
+          "identifier": "LennySA",
+          "extraInfo": {
+            "email": "lennysa@service.harness.io"
+          },
+          "triggerIdentifier": ""
+        },
+        "isRerun": false
+      },
+      "governanceMetadata": {
+        "id": "3570754",
+        "deny": false,
+        "details": [
+          {
+            "policySetId": "",
+            "deny": false,
+            "policyMetadata": [
+              {
+                "policyId": "",
+                "policyName": "Pipeline - Forbidden Steps",
+                "severity": "pass",
+                "denyMessages": [],
+                "status": "pass",
+                "identifier": "builtin-example-policy-4",
+                "accountId": "6_vVHzo9Qeu9fXvj-AcbCQ",
+                "orgId": "",
+                "projectId": "",
+                "created": "1637097093411",
+                "updated": "1637097093411",
+                "error": ""
+              }
+            ],
+            "policySetName": "Change Management",
+            "status": "pass",
+            "identifier": "example",
+            "created": "1638300578837",
+            "accountId": "6_vVHzo9Qeu9fXvj-AcbCQ",
+            "orgId": "",
+            "projectId": "",
+            "description": "Check to see if Pipeline execution is forbidden or there is no approval gate"
+          }
+        ],
+        "message": "",
+        "timestamp": "1693564440217",
+        "status": "pass",
+        "accountId": "6_vVHzo9Qeu9fXvj-AcbCQ",
+        "orgId": "SE_Sandbox",
+        "projectId": "Len_Sandbox",
+        "entity": "devBootstrap",
+        "type": "pipeline",
+        "action": "onrun",
+        "created": "1693564440208"
+      },
+      "moduleInfo": {
+        "ci": {
+          "__recast": "io.harness.ci.plan.creator.execution.CIPipelineModuleInfo",
+          "ciPipelineStageModuleInfo": {
+            "__recast": "io.harness.ci.plan.creator.execution.CIPipelineStageModuleInfo",
+            "stageExecutionId": "IRjDxiz4RgKjQVMZk9N64Q",
+            "stageId": "Onboard",
+            "stageName": "Create Git Repo",
+            "cpuTime": 11012,
+            "stageBuildTime": 14043,
+            "infraType": "HostedVm",
+            "osType": "Linux",
+            "osArch": "Amd64",
+            "startTs": 1693564440590,
+            "buildMultiplier": 2
+          },
+          "ciEditionType": "ENTERPRISE",
+          "ciLicenseType": "PAID",
+          "imageDetailsList": [],
+          "infraDetailsList": [
+            {
+              "__recast": "io.harness.ci.pipeline.executions.beans.CIInfraDetails",
+              "infraType": "HostedVm",
+              "infraOSType": "Linux",
+              "infraHostType": "Harness Hosted",
+              "infraArchType": "Amd64"
+            }
+          ],
+          "isPrivateRepo": false,
+          "scmDetailsList": [],
+          "tiBuildDetailsList": []
+        }
+      },
+      "layoutNodeMap": {
+        "J05XfJgHRuS_T0EFGDTEjA": {
+          "nodeType": "PipelineRollback",
+          "nodeGroup": "STAGE",
+          "nodeIdentifier": "prb-8V-8d0COTqq3VHibgtm-ow",
+          "name": "Pipeline Rollback",
+          "nodeUuid": "J05XfJgHRuS_T0EFGDTEjA",
+          "status": "NotStarted",
+          "module": "pms",
+          "moduleInfo": {
+            "pms": {}
+          },
+          "edgeLayoutList": {
+            "currentNodeChildren": [],
+            "nextIds": []
+          },
+          "isRollbackStageNode": false
+        },
+        "sYonklmjTWSfvUs72jc6qw": {
+          "nodeType": "CI",
+          "nodeGroup": "STAGE",
+          "nodeIdentifier": "Onboard",
+          "name": "Create Git Repo",
+          "nodeUuid": "sYonklmjTWSfvUs72jc6qw",
+          "status": "Success",
+          "module": "ci",
+          "moduleInfo": {
+            "ci": {
+              "__recast": "io.harness.ci.plan.creator.execution.CIStageModuleInfo"
+            }
+          },
+          "startTs": 1693564440590,
+          "endTs": 1693564454757,
+          "edgeLayoutList": {
+            "currentNodeChildren": [],
+            "nextIds": [
+              "r7IEDFloRTKiVpOQMQolAA"
+            ]
+          },
+          "nodeRunInfo": {
+            "whenCondition": "<+OnPipelineSuccess>",
+            "evaluatedCondition": true,
+            "expressions": [
+              {
+                "expression": "OnPipelineSuccess",
+                "expressionValue": "true",
+                "count": 1
+              }
+            ]
+          },
+          "failureInfo": {
+            "message": ""
+          },
+          "failureInfoDTO": {
+            "message": "",
+            "failureTypeList": [],
+            "responseMessages": []
+          },
+          "nodeExecutionId": "IRjDxiz4RgKjQVMZk9N64Q",
+          "executionInputConfigured": false,
+          "isRollbackStageNode": false
+        },
+        "zehDnBgGRLq7rSu2cm3nWA": {
+          "nodeType": "Custom",
+          "nodeGroup": "STAGE",
+          "nodeIdentifier": "Wrap_Up",
+          "name": "Wrap Up",
+          "nodeUuid": "zehDnBgGRLq7rSu2cm3nWA",
+          "status": "NotStarted",
+          "module": "pms",
+          "moduleInfo": {
+            "pms": {}
+          },
+          "edgeLayoutList": {
+            "currentNodeChildren": [],
+            "nextIds": []
+          },
+          "isRollbackStageNode": false
+        },
+        "r7IEDFloRTKiVpOQMQolAA": {
+          "nodeType": "Custom",
+          "nodeGroup": "STAGE",
+          "nodeIdentifier": "TFcreatepipeline",
+          "name": "TF-create-pipeline",
+          "nodeUuid": "r7IEDFloRTKiVpOQMQolAA",
+          "status": "Running",
+          "module": "pms",
+          "moduleInfo": {
+            "pms": {}
+          },
+          "startTs": 1693564454897,
+          "edgeLayoutList": {
+            "currentNodeChildren": [],
+            "nextIds": [
+              "6nZHB49lSl2Zau1vNjvVmA"
+            ]
+          },
+          "nodeRunInfo": {
+            "whenCondition": "<+OnPipelineSuccess>",
+            "evaluatedCondition": true,
+            "expressions": [
+              {
+                "expression": "OnPipelineSuccess",
+                "expressionValue": "true",
+                "count": 1
+              }
+            ]
+          },
+          "nodeExecutionId": "oxUedKWgRNe_uKeQBHX-bw",
+          "executionInputConfigured": false,
+          "isRollbackStageNode": false
+        },
+        "6nZHB49lSl2Zau1vNjvVmA": {
+          "nodeType": "Custom",
+          "nodeGroup": "STAGE",
+          "nodeIdentifier": "TFcreatetrigger",
+          "name": "TF-create-trigger",
+          "nodeUuid": "6nZHB49lSl2Zau1vNjvVmA",
+          "status": "NotStarted",
+          "module": "pms",
+          "moduleInfo": {
+            "pms": {}
+          },
+          "edgeLayoutList": {
+            "currentNodeChildren": [],
+            "nextIds": [
+              "zehDnBgGRLq7rSu2cm3nWA"
+            ]
+          },
+          "isRollbackStageNode": false
+        }
+      },
+      "modules": [
+        "pms",
+        "ci"
+      ],
+      "startingNodeId": "sYonklmjTWSfvUs72jc6qw",
+      "startTs": 1693564440217,
+      "createdAt": 1693564440404,
+      "canRetry": true,
+      "showRetryHistory": false,
+      "runSequence": 43,
+      "successfulStagesCount": 1,
+      "runningStagesCount": 1,
+      "failedStagesCount": 0,
+      "totalStagesCount": 4,
+      "storeType": "INLINE",
+      "executionInputConfigured": false,
+      "parentStageInfo": {
+        "hasparentpipeline": false,
+        "stagenodeid": "",
+        "executionid": "",
+        "identifier": "",
+        "projectid": "",
+        "orgid": "",
+        "runsequence": 0
+      },
+      "allowStageExecutions": false,
+      "executionMode": "NORMAL",
+      "stagesExecution": false
+    }
+  },
+  "metaData": null,
+  "correlationId": "f2040806-ec9e-4dde-b314-fa7a235763a0"
+}

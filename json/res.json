@@ -1,0 +1,132 @@
+{"status":"SUCCESS","data":{"planExecution":{"uuid":"bQkDA72ZQf6PRFYJBQ1oSA","createdAt":1693558080622,"planId":"9YSi_WrISTGIjsll-vKtBQ","setupAbstractions":{"accountId":"6_vVHzo9Qeu9fXvj-AcbCQ","orgIdentifier":"SE_Sandbox","projectIdentifier":"Len_Sandbox"},"validUntil":1709282880619,"status":"RUNNING","startTs":1693558080619,"endTs":null,"metadata":{
+  "runSequence": 39,
+  "triggerInfo": {
+    "triggerType": "MANUAL",
+    "triggeredBy": {
+      "uuid": "LennySA",
+      "identifier": "LennySA",
+      "extraInfo": {
+        "email": "lennysa@service.harness.io"
+      },
+      "triggerIdentifier": ""
+    },
+    "isRerun": false
+  },
+  "pipelineIdentifier": "devBootstrap",
+  "executionUuid": "bQkDA72ZQf6PRFYJBQ1oSA",
+  "principalInfo": {
+    "principal": "LennySA",
+    "principalType": "SERVICE_ACCOUNT",
+    "shouldValidateRbac": true
+  },
+  "gitSyncBranchContext": "eJyNkkFPwjAYhlvFk+jV8CPkaEI84QRcooCixtvSdR2UdC1pOxT/hx78V/4CL6gcjCZqoke7AYnUzXBotr7v837r93U3d7sQNqjujDjek4jjniO4Jle63KV6Krg8fHtduzVgyYA1rqkeGU2UfaRIikwsPUPDIoqodsdZ6pF6tmXOCdZCnpCnRSekjLSRntgqD/ZJiGKm61JELd0jJjoQHxYmWEDk3zhVs3BWM1TVY8aS8dSZ+LK9JrnMDqUBc5YG/Vy0GFLayRxG4rT8vmncdgZIEj4TqhiLmGs3MAoNKXnPR53cMf6mWrK7TLG2FOnRlkCT0TdR9Pg/cSZfFgGZGZNECTYkgWkmZBTnzE6ZLsnpaGCFtbkbRc1nsy5phCJmlKQw7brjIvS8YPofeA+rABbMArPn/D1vpUwJbMEdb3h+cC0qxySuhBfD/nYV+859Qm2AddipeR3EA198b4IiPCR8vrXLFcAKhPMNBOAHscRVWQ==",
+  "moduleType": "CI",
+  "retryInfo": {
+    "isRetry": false,
+    "rootExecutionId": "",
+    "parentRetryId": ""
+  },
+  "isNotificationConfigured": false,
+  "pipelineStoreType": "INLINE",
+  "pipelineConnectorRef": "",
+  "harnessVersion": "0",
+  "isDebug": false,
+  "executionMode": "NORMAL",
+  "postExecutionRollbackInfo": [],
+  "originalPlanExecutionIdForRollbackMode": "",
+  "settingToValueMap": {
+    "enable_expression_engine_v2": "false",
+    "enable_matrix_label_by_name": "false",
+    "default_image_pull_policy_for_add_on_container": "Always",
+    "enable_node_execution_audit_events": "true"
+  },
+  "featureFlagToValueMap": {
+    "PIE_EXPRESSION_CONCATENATION": true,
+    "PIE_EXPRESSION_DISABLE_COMPLEX_JSON_SUPPORT": false
+  }
+},"governanceMetadata":{
+  "id": "3569174",
+  "deny": false,
+  "details": [{
+    "policySetId": "",
+    "deny": false,
+    "policyMetadata": [{
+      "policyId": "",
+      "policyName": "Pipeline - Forbidden Steps",
+      "severity": "pass",
+      "denyMessages": [],
+      "status": "pass",
+      "identifier": "builtin-example-policy-4",
+      "accountId": "6_vVHzo9Qeu9fXvj-AcbCQ",
+      "orgId": "",
+      "projectId": "",
+      "created": "1637097093411",
+      "updated": "1637097093411",
+      "error": ""
+    }],
+    "policySetName": "Change Management",
+    "status": "pass",
+    "identifier": "example",
+    "created": "1638300578837",
+    "accountId": "6_vVHzo9Qeu9fXvj-AcbCQ",
+    "orgId": "",
+    "projectId": "",
+    "description": "Check to see if Pipeline execution is forbidden or there is no approval gate"
+  }],
+  "message": "",
+  "timestamp": "1693558080619",
+  "status": "pass",
+  "accountId": "6_vVHzo9Qeu9fXvj-AcbCQ",
+  "orgId": "SE_Sandbox",
+  "projectId": "Len_Sandbox",
+  "entity": "devBootstrap",
+  "type": "pipeline",
+  "action": "onrun",
+  "created": "1693558080609"
+},"lastUpdatedAt":1693558080622,"version":0,"nextIteration":null,"ambiance":{"setupabstractions":{"accountId":"6_vVHzo9Qeu9fXvj-AcbCQ","orgIdentifier":"SE_Sandbox","projectIdentifier":"Len_Sandbox"},"levels":[],"planexecutionid":"bQkDA72ZQf6PRFYJBQ1oSA","metadata":{
+  "runSequence": 39,
+  "triggerInfo": {
+    "triggerType": "MANUAL",
+    "triggeredBy": {
+      "uuid": "LennySA",
+      "identifier": "LennySA",
+      "extraInfo": {
+        "email": "lennysa@service.harness.io"
+      },
+      "triggerIdentifier": ""
+    },
+    "isRerun": false
+  },
+  "pipelineIdentifier": "devBootstrap",
+  "executionUuid": "bQkDA72ZQf6PRFYJBQ1oSA",
+  "principalInfo": {
+    "principal": "LennySA",
+    "principalType": "SERVICE_ACCOUNT",
+    "shouldValidateRbac": true
+  },
+  "gitSyncBranchContext": "eJyNkkFPwjAYhlvFk+jV8CPkaEI84QRcooCixtvSdR2UdC1pOxT/hx78V/4CL6gcjCZqoke7AYnUzXBotr7v837r93U3d7sQNqjujDjek4jjniO4Jle63KV6Krg8fHtduzVgyYA1rqkeGU2UfaRIikwsPUPDIoqodsdZ6pF6tmXOCdZCnpCnRSekjLSRntgqD/ZJiGKm61JELd0jJjoQHxYmWEDk3zhVs3BWM1TVY8aS8dSZ+LK9JrnMDqUBc5YG/Vy0GFLayRxG4rT8vmncdgZIEj4TqhiLmGs3MAoNKXnPR53cMf6mWrK7TLG2FOnRlkCT0TdR9Pg/cSZfFgGZGZNECTYkgWkmZBTnzE6ZLsnpaGCFtbkbRc1nsy5phCJmlKQw7brjIvS8YPofeA+rABbMArPn/D1vpUwJbMEdb3h+cC0qxySuhBfD/nYV+859Qm2AddipeR3EA198b4IiPCR8vrXLFcAKhPMNBOAHscRVWQ==",
+  "moduleType": "CI",
+  "retryInfo": {
+    "isRetry": false,
+    "rootExecutionId": "",
+    "parentRetryId": ""
+  },
+  "isNotificationConfigured": false,
+  "pipelineStoreType": "INLINE",
+  "pipelineConnectorRef": "",
+  "harnessVersion": "0",
+  "isDebug": false,
+  "executionMode": "NORMAL",
+  "postExecutionRollbackInfo": [],
+  "originalPlanExecutionIdForRollbackMode": "",
+  "settingToValueMap": {
+    "enable_expression_engine_v2": "false",
+    "enable_matrix_label_by_name": "false",
+    "default_image_pull_policy_for_add_on_container": "Always",
+    "enable_node_execution_audit_events": "true"
+  },
+  "featureFlagToValueMap": {
+    "PIE_EXPRESSION_CONCATENATION": true,
+    "PIE_EXPRESSION_DISABLE_COMPLEX_JSON_SUPPORT": false
+  }
+},"expressionfunctortoken":924843657,"planid":"9YSi_WrISTGIjsll-vKtBQ","startts":1693558080555,"stageexecutionid":"","originalstageexecutionidforrollbackmode":""},"nodeId":"9YSi_WrISTGIjsll-vKtBQ","nodeType":"PLAN"}},"metaData":null,"correlationId":"6c7f7316-8c93-43b4-bdc1-32158af46b55"}
