@@ -115,7 +115,7 @@ pipeline:
                   name: PipelineCreate_Plan
                   identifier: PipelineCreate
                   spec:
-                    provisionerIdentifier: tfpipeline
+                    provisionerIdentifier: tfpipeline<+pipeline.variables.APPLICATION_NAME>
                     configuration:
                       command: Apply
                       configFiles:
@@ -151,7 +151,7 @@ pipeline:
                   name: PipelineCreate_Apply
                   identifier: PipelineCreate_Apply
                   spec:
-                    provisionerIdentifier: tfpipeline
+                    provisionerIdentifier: tfpipeline<+pipeline.variables.APPLICATION_NAME>
                     configuration:
                       type: InheritFromPlan
                   timeout: 10m
@@ -169,7 +169,7 @@ pipeline:
                   name: TriggerCreate_Plan
                   identifier: TriggerCreate
                   spec:
-                    provisionerIdentifier: tftrigger
+                    provisionerIdentifier: tftrigger<+pipeline.variables.APPLICATION_NAME>
                     configuration:
                       command: Apply
                       configFiles:
@@ -196,7 +196,7 @@ pipeline:
                   name: TriggerCreate_Apply
                   identifier: TriggerCreate_Apply
                   spec:
-                    provisionerIdentifier: tftrigger
+                    provisionerIdentifier: tftrigger<+pipeline.variables.APPLICATION_NAME>
                     configuration:
                       type: InheritFromPlan
                   timeout: 10m
@@ -232,8 +232,8 @@ pipeline:
                   spec:
                     to: leendert.meyer@harness.io
                     cc: ""
-                    subject: "New application onboarded: <+pipeline.variables.APPLICATION_NAME>.toString()"
-                    body: "Repo: <+pipeline.stages.Onboard.spec.execution.steps.Clone_and_Patch_Repo.output.outputVariables.FINAL_REPO_NAME>.toString()"
+                    subject: "New application onboarded: <+pipeline.variables.APPLICATION_NAME>"
+                    body: "Repo: <+pipeline.stages.Onboard.spec.execution.steps.Clone_and_Patch_Repo.output.outputVariables.FINAL_REPO_NAME>"
                   timeout: 10m
         tags: {}
   variables:
